@@ -2,17 +2,6 @@ import torch
 
 
 
-class Model(torch.nn.Module):
-    def __init__(self) -> None:
-        super().__init__()
-        self.conv1 = torch.nn.Conv2d(1, 20, 5)
-        self.conv2 = torch.nn.Conv2d(20, 20, 5)
-
-    def forward(self, x):
-        x = torch.nn.functional.relu(self.conv1(x))
-        return torch.nn.functional.relu(self.conv2(x))
-
-
 
 class LinearRegressionModel(torch.nn.Module):
     def __init__(self) -> None :
