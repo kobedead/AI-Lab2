@@ -21,16 +21,15 @@ def plot_rgb_tensor(to_plot: torch.Tensor, title: str):
 def mse(input_tensor: torch.Tensor, target: torch.Tensor) -> torch.Tensor:
     ## return mean squared error of 2 tensors
 
-    if input_tensor.size() == target.size() :        ##maybe chack for broadcastable??
-        error_tensor = input_tensor-target
-        mean = torch.mean(error_tensor**2)
-        return mean
 
-    return 0
+    error_tensor = target-input_tensor
+    mean = torch.mean(error_tensor**2)
+    return mean
+
 
 def create_image() -> torch.Tensor:
 
-    ##tensor -> (color,height, widht)
+    ##image tensor -> (color,height, widht)
                 #(color(rgb->3) , 2 , 3) => (3,2,3)
 
 
@@ -41,13 +40,12 @@ def create_image() -> torch.Tensor:
 
     #'distribute' colorvalue through tensor
     for i in range(len(data[0])) : #3
-        t=0
         for j in range(len(data)) : #6
             if j < 3:
                 image[i][0][j] = data[j][i]
             else :
-                image[i][1][t] = data[j][i]
-                t=t+1
+                image[i][1][j-3] = data[j][i]
+
 
 
     return image

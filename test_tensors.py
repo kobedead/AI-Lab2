@@ -73,6 +73,10 @@ def test_tensor_forward():
 
 
 if __name__ == "__main__":
+
+
+
+
     options = Options()
     print("\nQUESTION 1:\n")
     test_mse()
