@@ -95,10 +95,18 @@ class RegressionLearner(Learner):
         """START TODO: fill in the missing parts"""
 
         # forward the data through the model
-            
+
+        for data,target in dataset :
+            output = self.model.forward(data)
+
         # calculate the loss using the self-implemented mean squared error function
-        
+
+            test_loss =+ mse(output , target)
+
         # calculate the root mean squared error for the dataset
+
+        test_loss = math.sqrt(test_loss/len(dataset))
+
 
         """END TODO"""
 
@@ -141,14 +149,24 @@ class ClassificationLearner(Learner):
 
                 # forward the data through the model
 
+
+
+                output = self.model.forward(data)
+
+
                 # calculate the loss
-                loss = torch.tensor([0])
+                loss = self.criterion(output, targets)
 
                 # set all gradients to zero
-                    
+                self.optimizer.zero_grad()
+
                 # propagate the loss backwards
 
+                loss.backward()
+
                 # use your optimizer to perform an update step
+
+                self.optimizer.step()
 
                 """END TODO"""
 

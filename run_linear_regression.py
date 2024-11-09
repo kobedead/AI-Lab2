@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from datasets import HousesDataset
 
 from models import LinearRegressionModel
-from models import Model
 
 from learners import RegressionLearner
 
@@ -20,7 +19,7 @@ batch_size = 32
 
 epochs = 10
 
-learning_rate = 0.25
+learning_rate = 10
 
 ## INITIALISATION
 
