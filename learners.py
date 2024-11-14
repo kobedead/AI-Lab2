@@ -72,7 +72,7 @@ class RegressionLearner(Learner):
 
             train_losses.append(train_loss)
 
-            print(f"train epoch [{epoch + 1}/{epochs}]:\ttrain loss = {train_loss:.2f} €")   
+          #  print(f"train epoch [{epoch + 1}/{epochs}]:\ttrain loss = {train_loss:.2f} €")
 
             if train_loss <= min(train_losses):
                 self.save("leader")
@@ -104,7 +104,7 @@ class RegressionLearner(Learner):
             test_loss =+ mse(output , target)
 
         # calculate the root mean squared error for the dataset
-
+        print(len(dataset))
         test_loss = math.sqrt(test_loss/len(dataset))
 
 
@@ -144,7 +144,7 @@ class ClassificationLearner(Learner):
             for data, targets in train_dataloader:
                 data = data.to(device)
                 targets = targets.to(device)
-                
+
                 """START TODO: fill in the missing parts"""
 
                 # forward the data through the model
@@ -213,17 +213,34 @@ class ClassificationLearner(Learner):
         """START TODO: fill in the missing parts"""
 
         # process the data in batches
+        for data , targets in dataloader :
+            data = data.to(device)
+            targets = targets.to(device)
+            # forward the data through the model
+            out = self.model.forward(data)
 
-        # forward the data through the model
-            
-        # calculate the loss 
-            
-        # predict the labels
+            # calculate the loss
+            loss = self.criterion(out , targets)
 
-        # calculate the evaluation loss and accuracy for a batch
-        
+            # predict the labels
+            predLabels = torch.argmax(out , dim=1)
+
+
+            # calculate the evaluation loss and accuracy for a batch
+            for i in range(len(predLabels)) :
+                if predLabels[i]==targets[i]:
+                    eval_accuracy = eval_accuracy + 1
+
+            eval_loss += loss.item()*len(data)
+
         # calculate the evaluation loss and accuracy for the dataset
+        eval_loss = eval_loss/len(dataloader.dataset)
+        eval_accuracy = eval_accuracy/len(dataloader.dataset)
+
+
 
         """END TODO"""
 
         return (eval_loss, eval_accuracy)
+
+

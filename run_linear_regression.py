@@ -19,7 +19,7 @@ batch_size = 32
 
 epochs = 10
 
-learning_rate = 10
+learning_rate = 0.1
 
 ## INITIALISATION
 
@@ -59,6 +59,7 @@ train_dataloader = torch.utils.data.DataLoader(train_dataset, batch_size)
 # create an instance of the linear regression model
 
 model = LinearRegressionModel()
+
 
 # define an opimizer to fit the model (see https://pytorch.org/docs/stable/optim.html)
 

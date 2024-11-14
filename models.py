@@ -36,7 +36,7 @@ class NeuralNetworkClassificationModel(torch.nn.Module):
                                        self.layer2 ,
                                        torch.nn.ReLU(),
                                        self.layer3 ,
-                                       torch.nn.Softmax(dim=1)
+                                       torch.nn.LogSoftmax(dim=1)
                                        )
 
 
@@ -45,10 +45,17 @@ class NeuralNetworkClassificationModel(torch.nn.Module):
     def forward(self, x: torch.Tensor):
         """START TODO: forward tensor x through all layers."""
 
-        x =self.seq(x.view(64, -1))
-        #x = torch.nn.ReLU(self.layer1(x))
-        #x = torch.nn.ReLU(self.layer2(x))
-        #x = torch.nn.Softmax(self.layer3(x))
+        x = self.seq(x.view(len(x), -1))
+
+
+        """
+        x = self.layer1(x.view(len(x), -1))
+        x = torch.nn.ReLU(x)
+        x = self.layer2(x)
+        x = torch.nn.ReLU(x)
+        x = self.layer3(x)
+        x = torch.nn.Softmax(x)
+        """
         """END TODO"""
         return x
 

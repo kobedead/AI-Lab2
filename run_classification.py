@@ -18,7 +18,7 @@ batch_size_test = 1000
 
 epochs = 5
 
-learning_rate = 0.01
+learning_rate = 0.0001
 
 ## INITIALISATION
 
