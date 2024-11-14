@@ -27,9 +27,9 @@ class NeuralNetworkClassificationModel(torch.nn.Module):
         super().__init__()
         """ START TODO: fill in all three layers. Remember that each layer should contain 2 parts, a linear transformation and a nonlinear activation function."""
                             #image size=28*28
-        self.layer1 = torch.nn.Linear(28*28  , 200)
-        self.layer2 = torch.nn.Linear(200  , 70)
-        self.layer3 = torch.nn.Linear(70  , 10)
+        self.layer1 = torch.nn.Linear(28*28  , 500)
+        self.layer2 = torch.nn.Linear(500  , 200)
+        self.layer3 = torch.nn.Linear(200  , 10)
 
         self.seq = torch.nn.Sequential(self.layer1 ,
                                        torch.nn.ReLU(),

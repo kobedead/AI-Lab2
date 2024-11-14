@@ -222,7 +222,7 @@ class ClassificationLearner(Learner):
             # calculate the loss
             loss = self.criterion(out , targets)
 
-            # predict the labels
+            # predict the labels (index of 1 -> (0-9))
             predLabels = torch.argmax(out , dim=1)
 
 
